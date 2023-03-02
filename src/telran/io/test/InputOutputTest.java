@@ -63,13 +63,13 @@ class InputOutputTest {
 		printDirectoryFile(dir, maxLevel, 0);
 	}
 
-	void printDirectoryFile(File file, int maxLevel, int currentLevel) {
-		if (currentLevel <= maxLevel) {
+	void printDirectoryFile(File file, int maxLevel, int level) {
+		if (level <= maxLevel) {
 			String type = file.isDirectory() ? "dir" : "file";
-			System.out.printf("%s%s - %s\n", " ".repeat(currentLevel * MARGIN_LENGTH), file.getName(), type);
+			System.out.printf("%s%s - %s\n", " ".repeat(level * MARGIN_LENGTH), file.getName(), type);
 			if (file.isDirectory()) {
 				File[] children = file.listFiles();
-				Arrays.stream(children).forEach(child -> printDirectoryFile(child, maxLevel, currentLevel + 1));
+				Arrays.stream(children).forEach(child -> printDirectoryFile(child, maxLevel, level + 1));
 			}
 		}
 	}
