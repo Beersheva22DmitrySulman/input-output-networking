@@ -38,6 +38,7 @@ class InputOutputTest {
 	}
 
 	@Test
+	@Disabled
 	void printDirectoryFilesTest() throws IOException {
 		printDirectoryFiles(".", 0);
 	}
@@ -51,6 +52,7 @@ class InputOutputTest {
 	}
 
 	@Test
+	@Disabled
 	void printDirectoryFileTest() throws IOException {
 		printDirectoryFile(".", 0);
 	}
@@ -73,5 +75,22 @@ class InputOutputTest {
 			}
 		}
 	}
+	
+	@Test
+	void printDirectoryFilesWalkTest() throws IOException {
+		printDirectoryWalkFiles(".", 0);
+	}
 
+	void printDirectoryWalkFiles(String path, int maxLevel) throws IOException {
+		if (maxLevel < 1) {
+			maxLevel = Integer.MAX_VALUE;
+		}
+		Path dir = Path.of(path).toAbsolutePath().normalize();
+		int rootDirNameCount = dir.getNameCount();
+		Files.walk(dir, maxLevel).forEach(node -> {
+			int margin = (node.getNameCount() - rootDirNameCount) * MARGIN_LENGTH;
+			String type = Files.isDirectory(node) ? "dir" : "file";
+			System.out.printf("%s%s - %s\n", " ".repeat(margin), node.getFileName(), type);
+		});
+	}
 }
