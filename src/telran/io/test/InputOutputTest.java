@@ -47,7 +47,7 @@ class InputOutputTest {
 			maxLevel = Integer.MAX_VALUE;
 		}
 		Path dir = Path.of(path).toAbsolutePath().normalize();
-		Files.walkFileTree(dir, Collections.emptySet(), maxLevel, new PrintFileVisitor(dir));
+		Files.walkFileTree(dir, Collections.emptySet(), maxLevel, new PrintFileVisitor(dir.getNameCount()));
 	}
 
 	@Test

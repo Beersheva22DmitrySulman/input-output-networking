@@ -8,11 +8,11 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
 public class PrintFileVisitor extends SimpleFileVisitor<Path> {
-	private final Path rootDir;
+	private final int rootDirNameCount;
 	private static final int MARGIN_LENGTH = 3;
 
-	public PrintFileVisitor(Path rootDir) {
-		this.rootDir = rootDir;
+	public PrintFileVisitor(int rootDirNameCount) {
+		this.rootDirNameCount = rootDirNameCount;
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class PrintFileVisitor extends SimpleFileVisitor<Path> {
 	}
 
 	private void printNode(Path node) {
-		int margin = (node.getNameCount() - rootDir.getNameCount()) * MARGIN_LENGTH;
+		int margin = (node.getNameCount() - rootDirNameCount) * MARGIN_LENGTH;
 		String type = Files.isDirectory(node) ? "dir" : "file";
 		System.out.printf("%s%s - %s\n", " ".repeat(margin), node.getFileName(), type);
 	}
