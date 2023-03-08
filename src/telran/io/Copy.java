@@ -17,8 +17,16 @@ abstract public class Copy {
 	
 	abstract public DisplayResult getDisplayResult(long copyTime, long fileSize);
 	
-	public void copyRun() throws IOException {
-		copy();
+	public void copyRun() {
+		try {
+			long timeStart = System.currentTimeMillis();
+			long size = copy();
+			long timeEnd = System.currentTimeMillis();
+			DisplayResult displayResult = getDisplayResult(timeEnd - timeStart, size);
+			System.out.println(displayResult);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public String getSrcFilePath() {
