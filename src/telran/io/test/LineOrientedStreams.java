@@ -16,14 +16,16 @@ class LineOrientedStreams {
 
 	@Test
 	void printStreamTest() throws Exception {
-		PrintStream printStream = new PrintStream(fileNamePrintStream);
-		printStream.println(line);
+		try (PrintStream printStream = new PrintStream(fileNamePrintStream)) {
+			printStream.println(line);
+		}
 	}
-	
+
 	@Test
 	void printWriterTest() throws Exception {
-		PrintWriter printWriter = new PrintWriter(fileNamePrintWriter);
-		printWriter.println(line);
+		try (PrintWriter printWriter = new PrintWriter(fileNamePrintWriter)) {
+			printWriter.println(line);
+		}
 	}
 
 }
