@@ -15,11 +15,7 @@ public class FilesCopy extends Copy {
 	public long copy() throws IOException {
 		Path src = Path.of(srcFilePath);
 		Path dest = Path.of(destFilePath);
-		if (overwrite) {
-			Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
-		} else {
-			Files.copy(src, dest);
-		}
+		Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
 		
 		return Files.size(src);
 	}

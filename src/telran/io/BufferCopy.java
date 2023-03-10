@@ -5,9 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class BufferCopy extends Copy {
 	private final int bufferSize;
@@ -19,7 +16,6 @@ public class BufferCopy extends Copy {
 
 	@Override
 	public long copy() throws IOException {
-		checkDestFile();
 		byte[] buffer = new byte[bufferSize];
 		long res = 0L;
 		try (InputStream input = new FileInputStream(srcFilePath);
@@ -33,14 +29,6 @@ public class BufferCopy extends Copy {
 		}
 		
 		return res;
-	}
-	
-	private void checkDestFile() throws FileAlreadyExistsException {
-		if (!overwrite) {
-			if (Files.exists(Path.of(destFilePath))) {
-				throw new FileAlreadyExistsException("File already exist");
-			}
-		}
 	}
 
 	@Override

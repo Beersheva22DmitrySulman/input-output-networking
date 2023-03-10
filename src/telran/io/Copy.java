@@ -1,6 +1,9 @@
 package telran.io;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 abstract public class Copy {
 	protected final String srcFilePath;
@@ -19,6 +22,7 @@ abstract public class Copy {
 	
 	public void copyRun() {
 		try {
+			checkDestFile();
 			long timeStart = System.currentTimeMillis();
 			long size = copy();
 			long timeEnd = System.currentTimeMillis();
@@ -26,6 +30,12 @@ abstract public class Copy {
 			System.out.println(displayResult);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
+		}
+	}
+	
+	private void checkDestFile() throws FileAlreadyExistsException {
+		if (!overwrite && Files.exists(Path.of(destFilePath))) {
+			throw new FileAlreadyExistsException("File already exist");
 		}
 	}
 	

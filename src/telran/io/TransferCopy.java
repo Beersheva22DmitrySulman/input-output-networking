@@ -5,9 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class TransferCopy extends Copy {
 
@@ -17,7 +14,6 @@ public class TransferCopy extends Copy {
 
 	@Override
 	public long copy() throws IOException {
-		checkDestFile();
 		long res;
 		try (InputStream input = new FileInputStream(srcFilePath);
 				OutputStream output = new FileOutputStream(destFilePath)) {
@@ -25,14 +21,6 @@ public class TransferCopy extends Copy {
 		}
 		
 		return res;
-	}
-	
-	private void checkDestFile() throws FileAlreadyExistsException {
-		if (!overwrite) {
-			if (Files.exists(Path.of(destFilePath))) {
-				throw new FileAlreadyExistsException("File already exist");
-			}
-		}
 	}
 
 	@Override
