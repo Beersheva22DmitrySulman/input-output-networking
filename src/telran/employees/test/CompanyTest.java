@@ -32,7 +32,7 @@ class CompanyTest {
 	void setUp() throws Exception {
 		employees = new ArrayList<>();
 		employees.add(new Employee(0, "Emp0", LocalDate.of(2022, 12, 25), "Dep1", 10_000));
-		employees.add(new Employee(1, "Emp1", LocalDate.of(2022, 12, 25), "Dep1", 20_000));
+		employees.add(new Employee(1, "Emp1", LocalDate.of(2022, 12, 25), "Dep1", 10_000));
 		employees.add(new Employee(2, "Emp2", LocalDate.of(2022, 11, 25), "Dep2", 30_000));
 		employees.add(new Employee(3, "Emp3", LocalDate.of(2022, 10, 25), "Dep2", 40_000));
 		employees.add(new Employee(4, "Emp4", LocalDate.of(2022, 10, 25), "Dep3", 50_000));
