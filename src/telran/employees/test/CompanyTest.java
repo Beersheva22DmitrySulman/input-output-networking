@@ -62,7 +62,6 @@ class CompanyTest {
 
 	@Test
 	void getEmployeeAfterRestoreTest() {
-		addEmployeesToCompany();
 		saveAndRestoreCompany();
 		getEmployee();
 	}
@@ -75,14 +74,12 @@ class CompanyTest {
 
 	@Test
 	void getNonExistEmployeeAfterRestoreTest() {
-		addEmployeesToCompany();
 		saveAndRestoreCompany();
 		assertNull(company.getEmployee(5));
 	}
 
 	@Test
 	void removeEmployeeAfterRestoreTest() {
-		addEmployeesToCompany();
 		saveAndRestoreCompany();
 		removeEmployee();
 	}
@@ -101,7 +98,6 @@ class CompanyTest {
 
 	@Test
 	void getAllEmployeesAfterRestoreTest() {
-		addEmployeesToCompany();
 		saveAndRestoreCompany();
 		getAllEmployees();
 	}
@@ -114,7 +110,6 @@ class CompanyTest {
 
 	@Test
 	void iteratorAfterRestoreTest() {
-		addEmployeesToCompany();
 		saveAndRestoreCompany();
 		iterator();
 	}
@@ -139,21 +134,18 @@ class CompanyTest {
 
 	@Test
 	void getEmployeesByMonthBirthAfterRestoreTest() {
-		addEmployeesToCompany();
 		saveAndRestoreCompany();
 		getEmployeesByMonthBirth();
 	}
 
 	@Test
 	void getEmployeesByDepartmentAfterRestoreTest() {
-		addEmployeesToCompany();
 		saveAndRestoreCompany();
 		getEmployeesByDepartment();
 	}
 
 	@Test
 	void getEmployeesBySalaryAfterRestoreTest() {
-		addEmployeesToCompany();
 		saveAndRestoreCompany();
 		getEmployeesBySalary();
 	}
@@ -240,6 +232,7 @@ class CompanyTest {
 	}
 
 	private void saveAndRestoreCompany() {
+		addEmployeesToCompany();
 		company.save(FILE_PATH);
 		company = new CompanyImpl();
 		company.restore(FILE_PATH);
