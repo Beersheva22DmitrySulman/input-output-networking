@@ -93,15 +93,6 @@ class CompanyTest {
 		removeEmployee();
 	}
 
-	private void removeEmployee() {
-		Employee employee = company.removeEmployee(4);
-		assertEquals("Emp4", employee.getName());
-		assertNull(company.getEmployee(4));
-		assertEquals(1, company.getEmployeesByMonthBirth(10).size());
-		assertTrue(company.getEmployeesByDepartment("Dep3").isEmpty());
-		assertTrue(company.getEmployeesBySalary(50_000, 50_000).isEmpty());
-	}
-
 	@Test
 	void getAllEmployeesTest() {
 		addEmployeesToCompany();
@@ -237,6 +228,15 @@ class CompanyTest {
 		Employee[] array = company.getAllEmployees().stream().sorted(Comparator.comparingLong(Employee::getId))
 				.toArray(Employee[]::new);
 		assertArrayEquals(expected, array);
+	}
+	
+	private void removeEmployee() {
+		Employee employee = company.removeEmployee(4);
+		assertEquals("Emp4", employee.getName());
+		assertNull(company.getEmployee(4));
+		assertEquals(1, company.getEmployeesByMonthBirth(10).size());
+		assertTrue(company.getEmployeesByDepartment("Dep3").isEmpty());
+		assertTrue(company.getEmployeesBySalary(50_000, 50_000).isEmpty());
 	}
 
 	private void saveAndRestoreCompany() {
