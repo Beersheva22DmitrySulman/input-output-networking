@@ -84,17 +84,22 @@ class CompanyTest {
 	void removeEmployeeAfterRestoreTest() {
 		addEmployeesToCompany();
 		saveAndRestoreCompany();
-		Employee employee = company.removeEmployee(4);
-		assertEquals("Emp4", employee.getName());
-		assertNull(company.getEmployee(4));
+		removeEmployee();
 	}
 
 	@Test
 	void removeEmployeeTest() {
 		addEmployeesToCompany();
+		removeEmployee();
+	}
+
+	private void removeEmployee() {
 		Employee employee = company.removeEmployee(4);
 		assertEquals("Emp4", employee.getName());
 		assertNull(company.getEmployee(4));
+		assertEquals(1, company.getEmployeesByMonthBirth(10).size());
+		assertTrue(company.getEmployeesByDepartment("Dep3").isEmpty());
+		assertTrue(company.getEmployeesBySalary(50_000, 50_000).isEmpty());
 	}
 
 	@Test

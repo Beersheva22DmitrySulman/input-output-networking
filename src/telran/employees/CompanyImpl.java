@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -76,7 +77,7 @@ public class CompanyImpl implements Company {
 
 	@Override
 	public List<Employee> getEmployeesByMonthBirth(int month) {
-		return employeesByMonthBirth.get(month).stream().toList();
+		return employeesByMonthBirth.getOrDefault(month, Collections.emptySet()).stream().toList();
 	}
 
 	@Override
@@ -88,7 +89,7 @@ public class CompanyImpl implements Company {
 
 	@Override
 	public List<Employee> getEmployeesByDepartment(String department) {
-		return employeesByDepartment.get(department).stream().toList();
+		return employeesByDepartment.getOrDefault(department, Collections.emptySet()).stream().toList();
 	}
 
 	@Override
